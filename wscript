@@ -1185,7 +1185,7 @@ def load_from_yaml(load, ctx, data_by_uid, base, path):
     for name in names:
         path2 = os.path.join(path, name)
         if name.endswith(".yml") and not name.startswith("."):
-            uid = "/" + os.path.relpath(path2, base).replace(".yml", "")
+            uid = os.path.relpath(path2, base).replace(".yml", "")
             with open(path2, "r") as f:
                 data_by_uid[uid] = load(f.read())
         else:
@@ -1499,7 +1499,7 @@ def get_path_list(conf):
 def get_top_group(ctx):
     top_group = ctx.options.rtems_top_group
     if top_group is None:
-        top_group = "/grp"
+        top_group = "grp"
     if top_group not in items:
         ctx.fatal(
             "There is no top-level group with UID '{}' in the specification".
